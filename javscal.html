@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>sample calc</title>
+</head>
+<body>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+    }
+    .page{
+      height: 100vh;
+      width: 100%;
+      background-image: linear-gradient(rgba(4,3,40,0.6),rgba(4,3,40,0.6));
+      text-align: center;
+    }
+    h3{
+      font-size: 1.7em;
+    }
+    .nums{
+      padding: 2% 2%;
+      background-color: cadetblue;
+      margin-left: 20%;
+      margin-right: 20%;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.2em;
+    }
+    button{
+      border-radius: 12px;
+      width: 2em;
+      height: 2em;
+      border: none;
+      padding: 2% 2%;
+      font-size: 1.7em;
+      transition: 0.7s;
+    }
+    button:hover{
+      background-color: burlywood;
+    }
+#display{
+  color: blue;
+  font-size: 1.7em;
+  border-radius: 12px;
+  padding: 1% 1%;
+  background-color: whitesmoke;
+}
+
+@media(max-width:320px){
+  .page{
+    padding: 15px;
+  }
+  button{
+    height: 50px;
+    font-size: 18px;
+  }
+  .display{
+    height: 50px;
+    font-size: 18px;
+  }
+}
+
+  </style>
+<section class="page">
+  <br><br>
+  <h3>It's always a gradual process!</h3>
+  <br><br>
+  <input type="text" id="display" disabled>
+  <br><br>
+  <div class="nums">
+    <button onclick="cleardisplay()" id="clear">C</button>
+    <button onclick="appendtodisplay('.')" id="">.</button>
+  </div>
+  <div class="nums">
+    <button onclick="appendtodisplay('1')" id="">1</button>
+    <button onclick="appendtodisplay('2')" id="">2</button>
+    <button onclick="appendtodisplay('3')" id="">3</button>
+    <button onclick="appendtodisplay('-')" class="operator">-</button>
+  </div>
+
+  <div class="nums">
+    <button onclick="appendtodisplay('4')" id="">4</button>
+    <button onclick="appendtodisplay('5')" id="">5</button>
+    <button onclick="appendtodisplay('6')" id="">6</button>
+    <button onclick="appendtodisplay('*')" class="operator">*</button>
+  </div>
+  <div class="nums">
+    <button onclick="appendtodisplay('7')" id="">7</button>
+    <button onclick="appendtodisplay('8')" id="">8</button>
+    <button onclick="appendtodisplay('9')" id="">9</button>
+    <button onclick="appendtodisplay('/')" class="operator">/</button>
+  </div>
+  <div class="nums">
+    <button onclick="calculate()" id="">=</button>
+    <button onclick="appendtodisplay('0')"  id="">0</button>
+    <button onclick="appendtodisplay('%')" class="operator">%</button>
+    <button onclick="appendtodisplay('+')" class="operator">+</button>
+  </div>
+
+  <script>
+    let display=document.getElementById('display');
+
+    function appendtodisplay(value){
+      display.value += value;
+    }
+function cleardisplay(){
+  display.value = '';
+}
+function deletelast(){
+  display.value = display.value.slice(0,-1);
+}
+
+function calculate(){
+try{
+  let expression = display.value.replace(/%/g,'/100');
+  display.value = eval(expression);
+
+} catch(error){
+  display.value='error';
+  setTimeout(cleardisplay,1000);
+}
+}
+
+
+  document.addEventListener('keydown',function(event){
+  appendtodisplay(event.key);
+  if (event.key >= '0' && event.key <='9' || '+-/%*.'.includes(event.key)){
+    appendtodisplay(event.key);
+  } else if (event.key === 'Enter'){
+    calculate();
+  } else if(event.key ==='backspace'){
+    deletelast();
+  } else if (event.key === 'escape'){
+    cleardisplay();
+  }
+});
+
+  </script>
+  </section>
+</body>
+</html>
