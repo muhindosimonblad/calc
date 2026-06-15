@@ -20,11 +20,13 @@
     h3{
       font-size: 1.7em;
     }
+    .keys{
+      background-color: black;
+    }
     .nums{
       padding: 2% 2%;
-      background-color: cadetblue;
-      margin-left: 20%;
-      margin-right: 20%;
+      margin-left: 10%;
+      margin-right: 10%;
       border-radius: 12px;
       display: flex;
       justify-content: space-between;
@@ -57,6 +59,7 @@
   button{
     height: 50px;
     font-size: 18px;
+    justify-content: space-between;
   }
   .display{
     height: 50px;
@@ -69,8 +72,9 @@
   <br><br>
   <h3>It's always a gradual process!</h3>
   <br><br>
+
   <input type="text" id="display" disabled>
-  <br><br>
+  <br><br><br><br><br><br><br>
   <div class="nums">
     <button onclick="cleardisplay()" id="clear">C</button>
     <button onclick="appendtodisplay('.')" id="">.</button>
@@ -100,7 +104,7 @@
     <button onclick="appendtodisplay('%')" class="operator">%</button>
     <button onclick="appendtodisplay('+')" class="operator">+</button>
   </div>
-
+ </section>
   <script>
     let display=document.getElementById('display');
 
@@ -140,6 +144,6 @@ try{
 });
 
   </script>
-  </section>
+ 
 </body>
 </html>
